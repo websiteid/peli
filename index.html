@@ -305,10 +305,323 @@
       from { opacity: 0.5; }
       to { opacity: 1; }
     }
+     .popup-notif {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 18px 24px;
+  border-radius: 16px;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 0.95rem;
+  backdrop-filter: blur(10px);
+  z-index: 9999;
+  text-align: left;
+  max-width: 90%;
+  width: 360px;
+  opacity: 0;
+  transition: all 0.6s ease;
+  pointer-events: auto;
+}
 
+.popup-notif.show {
+  opacity: 1;
+}
+
+.popup-content {
+  position: relative;
+  padding-right: 24px;
+}
+
+.popup-close {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #ffffffcc;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.15);
+  width: 28px;
+  height: 28px;
+  line-height: 26px;
+  text-align: center;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #00000040;
+  transition: all 0.3s ease;
+}
+
+.popup-close:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.1);
+}
+.feedback-container {
+  max-width: 420px;
+  margin: 20px auto 40px;
+  padding: 25px 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 25px rgba(108, 92, 231, 0.3);
+  color: #fff;
+  text-align: center;
+}
+
+.feedback-container h2 {
+  margin-bottom: 15px;
+  font-weight: 700;
+  color: #6c5ce7;
+}
+
+.feedback-container textarea {
+  width: 100%;
+  resize: vertical;
+  padding: 12px 15px;
+  border-radius: 12px;
+  border: none;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  box-shadow: inset 0 0 6px #6c5ce7;
+  transition: background 0.3s ease;
+}
+
+.feedback-container textarea:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 0 14px #6c5ce7;
+}
+
+.feedback-container button.button {
+  margin-top: 12px;
+  max-width: 180px;
+  font-weight: 600;
+}
+#chat-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #6c5ce7;
+  color: white;
+  font-size: 24px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 50px;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(108, 92, 231, 0.4);
+  z-index: 9998;
+  transition: transform 0.3s;
+}
+
+#chat-button:hover {
+  transform: scale(1.1);
+}
+
+.chat-popup {
+  display: none;
+  position: fixed;
+  bottom: 85px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(12px);
+  padding: 18px;
+  border-radius: 16px;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
+  max-width: 320px;
+  width: 90%;
+  z-index: 9999;
+  color: white;
+}
+
+.chat-popup.show {
+  display: block;
+  animation: slideUp 0.3s ease;
+}
+
+.chat-popup textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: none;
+  font-family: 'Poppins', sans-serif;
+  resize: vertical;
+  box-shadow: inset 0 0 6px #6c5ce7;
+}
+
+.chat-popup textarea:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.chat-popup .chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.chat-popup .chat-header button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #fff;
+  cursor: pointer;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+ .chat-popup-wrapper {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 9999;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  /* Button chat bulat */
+  .chat-btn {
+    width: 60px;
+    height: 60px;
+    background: #6c5ce7;
+    border-radius: 50%;
+    box-shadow: 0 8px 20px rgba(108, 92, 231, 0.6);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 28px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  .chat-btn:hover {
+    background: #341f97;
+    transform: scale(1.1);
+  }
+
+  /* Popup form container */
+  .chat-form-popup {
+    position: absolute;
+    bottom: 75px;
+    right: 0;
+    width: 320px;
+    background: rgba(255 255 255 / 0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 16px;
+    box-shadow: 0 0 40px rgba(108, 92, 231, 0.4);
+    padding: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px) scale(0.95);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+  .chat-form-popup.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+  }
+
+  /* Header dan tombol close */
+  .chat-form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .chat-form-header h3 {
+    font-size: 1.25rem;
+    color: #fff;
+    margin: 0;
+  }
+  .chat-close-btn {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  .chat-close-btn:hover {
+    color: #ff4757;
+  }
+
+  /* Textarea */
+  .chat-form-popup textarea {
+    width: 100%;
+    resize: vertical;
+    min-height: 90px;
+    border-radius: 12px;
+    border: none;
+    padding: 12px 15px;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    background: rgba(255 255 255 / 0.15);
+    box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s ease;
+  }
+  .chat-form-popup textarea::placeholder {
+    color: #ddd;
+  }
+  .chat-form-popup textarea:focus {
+    outline: none;
+    background: rgba(255 255 255 / 0.25);
+    box-shadow: inset 0 0 12px #6c5ce7;
+  }
+
+  /* Submit Button */
+  .chat-form-popup button[type="submit"] {
+    margin-top: 15px;
+    width: 100%;
+    padding: 12px;
+    background: #00bcd4;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    box-shadow: 0 0 20px #00bcd4;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  .chat-form-popup button[type="submit"]:hover {
+    background: #0097a7;
+    transform: scale(1.05);
+  }
+
+  /* Status message */
+  #form-status {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    min-height: 20px;
+    color: lightgreen;
+    text-align: center;
+  }
+
+  /* Responsive */
+  @media (max-width: 400px) {
+    .chat-form-popup {
+      width: 90vw;
+      right: 5vw;
+    }
+  }
   </style>
+   <link rel="icon" href="c:\Users\LENOVO\Downloads\ankan\Untitled design.png" type="image/png">
 </head>
 <body>
+
+
+
 
   <!-- Loading Screen -->
   <div id="loading-screen">
@@ -320,6 +633,16 @@
 
   <!-- Canvas bintang -->
   <canvas id="twinkle-bg"></canvas>
+
+  <div id="popup-notif" class="popup-notif">
+  <div class="popup-content">
+    <span class="popup-close" onclick="closePopup()">×</span>
+    <strong>🔥Promo Bulan ini!!</strong><br />
+    Premium paket lengkap cuma Rp 6.000 hanya di @vvip_3_bot
+  </div>
+</div>
+
+
 
   <!-- Planet kiri dan kanan -->
   <div class="planet-container left">
@@ -337,23 +660,25 @@
     <p class="fade-up">Gabung ke channel Telegram kami untuk konten menarik, eksklusif, dan premium tiap hari!</p>
 
     <div class="button-group">
-      <a href="https://t.me/+GDXb7qYaLytkNDA1" target="_blank" rel="noopener noreferrer">
+      <a href="https://t.me/+GDXb7qYaLytkNDA1" rel="noopener noreferrer">
         <button class="button btn-channel">🚀 Join Channel</button>
       </a>
 
-      <a href="https://t.me/vvip_3_bot" target="_blank" rel="noopener noreferrer">
+      <a href="https://t.me/vvip_3_bot"  rel="noopener noreferrer">
         <button class="button btn-premium">⭐ Beli Premium</button>
       </a>
 
-      <a href="p.html" target="_blank" rel="noopener noreferrer">
+      <a href="p.html" rel="noopener noreferrer">
         <button class="button btn-arsip">📂 Arsip</button>
       </a>
 
-      <a href="https://t.me/ujoyp" target="_blank" rel="noopener noreferrer">
+      <a href="https://t.me/ujoyp" rel="noopener noreferrer">
         <button class="button btn-chat">💬 Chat Admin</button>
       </a>
     </div>
   </div>
+
+
 
   <!-- Footer di bawah container -->
   <div class="footer-container fade-up">
@@ -488,6 +813,61 @@
       }, 500);
     });
   </script>
+
+<script>
+  function closePopup() {
+    const popup = document.getElementById('popup-notif');
+    popup.style.opacity = '0';
+    setTimeout(() => popup.style.display = 'none', 500);
+    
+    // Hapus baris ini agar popup tidak disimpan:
+    // localStorage.setItem('popupDismissed', 'true');
+  }
+
+  window.addEventListener('load', () => {
+    const popup = document.getElementById('popup-notif');
+
+    // Hapus pengecekan ini agar popup selalu muncul:
+    // if (localStorage.getItem('popupDismissed')) return;
+
+    setTimeout(() => {
+      popup.classList.add('show');
+    }, 1000); // Delay muncul (1 detik)
+  });
+</script>
+
+<script>
+  function toggleChat() {
+    const popup = document.getElementById('chat-form-popup');
+    popup.classList.toggle('show');
+  }
+
+  const popupForm = document.getElementById('popup-feedback-form');
+  const popupStatus = document.getElementById('popup-status');
+
+  popupForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const msg = document.getElementById('popup-message').value.trim();
+
+    if (!msg) {
+      popupStatus.textContent = 'Pesan tidak boleh kosong.';
+      popupStatus.style.color = '#ff6b6b';
+      return;
+    }
+
+    popupStatus.textContent = 'Mengirim...';
+    popupStatus.style.color = '#fff';
+
+    setTimeout(() => {
+      popupStatus.textContent = '✅ Pesan berhasil dikirim!';
+      popupStatus.style.color = '#6c5ce7';
+      popupForm.reset();
+    }, 1200);
+  });
+</script>
+
+
+
 
 </body>
 </html>
