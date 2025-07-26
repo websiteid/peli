@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Peli - Galaksi Premium</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow-y: auto;
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+      color: #fff;
+    }
+
+    canvas#twinkle-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .container {
+      position: relative;
+      z-index: 10;
+      max-width: 480px;
+      margin: 120px auto 40px;
+      padding: 40px 30px;
+      background: rgba(255, 255, 255, 0.07);
+      border-radius: 20px;
+      text-align: center;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 0 40px rgba(108, 92, 231, 0.3);
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #fff;
+      margin-bottom: 5px;
+      text-shadow: 0 0 15px #6c5ce7;
+      letter-spacing: 1.5px;
+    }
+
+    #clock {
+      font-size: 0.95rem;
+      color: #ccc;
+      margin-bottom: 25px;
+    }
+
+    .telegram-logo {
+      width: 70px;
+      margin: 10px auto 30px;
+      display: block;
+      filter: drop-shadow(0 0 5px #00bcd4);
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #ccc;
+      margin-bottom: 35px;
+      line-height: 1.5;
+    }
+
+    .button {
+      margin: 10px 15px;
+      padding: 14px 32px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-channel {
+      background: #00bcd4;
+      color: white;
+    }
+
+    .btn-premium {
+      background: #ffeb3b;
+      color: #6c5ce7;
+    }
+
+    .btn-chat {
+      background: #6c5ce7;
+      color: white;
+    }
+
+    .button:hover {
+      transform: scale(1.07);
+      opacity: 0.95;
+    }
+
+    .footer {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 0.85rem;
+      color: #aaa;
+      z-index: 10;
+    }
+
+    /* Planet orbit kiri dan kanan */
+    .planet-container {
+      position: fixed;
+      bottom: 40px;
+      width: 80px;
+      height: 80px;
+      z-index: 5;
+      pointer-events: none;
+      animation: orbit 60s linear infinite;
+      transform-origin: center center;
+    }
+
+    .planet-container.left {
+      left: 40px;
+    }
+
+    .planet-container.right {
+      right: 40px;
+    }
+
+    .planet {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #6c5ce7, #341f97);
+      box-shadow: 0 0 12px #6c5ce7;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    @keyframes orbit {
+      0% {
+        transform: rotate(0deg) translateX(60px) rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg) translateX(60px) rotate(-360deg);
+      }
+    }
+
+    .star {
+      position: fixed;
+      font-size: 16px;
+      color: white;
+      pointer-events: none;
+      z-index: 5;
+      animation: fall linear forwards;
+      text-shadow: 0 0 5px #fff;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        margin: 100px 20px;
+        padding: 30px 20px;
+      }
+
+      h1 {
+        font-size: 2.4rem;
+      }
+
+      #clock {
+        font-size: 0.85rem;
+      }
+
+      .planet-container {
+        width: 60px;
+        height: 60px;
+      }
+
+      .planet {
+        width: 30px;
+        height: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Canvas bintang -->
+  <canvas id="twinkle-bg"></canvas>
+
+  <!-- Planet kiri dan kanan -->
+  <div class="planet-container left">
+    <div class="planet"></div>
+  </div>
+  <div class="planet-container right">
+    <div class="planet" style="background: radial-gradient(circle, #ffeb3b, #bfae1c); box-shadow: 0 0 14px #ffeb3b;"></div>
+  </div>
+
+  <!-- Konten utama -->
+  <div class="container">
+    <h1>Peli</h1>
+    <div id="clock">--:--:--</div>
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"
+      class="telegram-logo"
+      alt="Telegram Logo"
+    />
+    <p>Gabung ke channel Telegram kami untuk konten lucu, eksklusif, dan premium tiap hari!</p>
+
+    <a href="https://t.me/+GDXb7qYaLytkNDA1" target="_blank">
+      <button class="button btn-channel">🚀 Join Channel</button>
+    </a>
+    <a href="https://t.me/vvip_3_bot" target="_blank">
+      <button class="button btn-premium">⭐ Beli Premium</button>
+    </a>
+    <a href="https://t.me/ujoyp" target="_blank">
+      <button class="button btn-chat">💬 Chat Admin</button>
+    </a>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    Dibuat dengan 🌠 oleh <strong>@ujoyp</strong><br />
+    © 2025 Peli Universe
+  </div>
+
+  <!-- Bintang jatuh -->
+  <script>
+    function createStar() {
+      const star = document.createElement('div');
+      star.classList.add('star');
+      star.textContent = '⭐';
+      star.style.left = Math.random() * window.innerWidth + 'px';
+      star.style.top = '-30px';
+      star.style.fontSize = (Math.random() * 12 + 12) + 'px';
+      star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      document.body.appendChild(star);
+      setTimeout(() => star.remove(), 5000);
+    }
+    setInterval(createStar, 300);
+  </script>
+
+  <!-- Twinkle bintang canvas -->
+  <script>
+    const canvas = document.getElementById('twinkle-bg');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const stars = Array.from({ length: 200 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      radius: Math.random() * 1.5,
+      alpha: Math.random(),
+      delta: Math.random() * 0.02 + 0.005,
+    }));
+
+    function drawTwinkles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      stars.forEach((star) => {
+        star.alpha += star.delta;
+        if (star.alpha <= 0 || star.alpha >= 1) star.delta = -star.delta;
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${star.alpha.toFixed(2)})`;
+        ctx.fill();
+      });
+      requestAnimationFrame(drawTwinkles);
+    }
+    drawTwinkles();
+  </script>
+
+  <!-- Update jam realtime -->
+  <script>
+    function updateClock() {
+      const clock = document.getElementById('clock');
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('id-ID', { hour12: false });
+      const dateStr = now.toLocaleDateString('id-ID', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      });
+      clock.textContent = `${timeStr} — ${dateStr}`;
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
+</body>
+</html>
