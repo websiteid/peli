@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coming Soon</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at center, #050014 0%, #000000 100%);
+      font-family: 'Orbitron', sans-serif;
+      color: #00fff7;
+      overflow: hidden;
+    }
+
+    .container {
+      width: 100vw;
+      height: 100vh;
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glow-text {
+      position: absolute;
+      font-size: 3rem;
+      font-weight: 600;
+      text-shadow:
+        0 0 10px #00fff7,
+        0 0 20px #00fff7,
+        0 0 40px #00e8ff;
+      opacity: 0.07;
+      animation: float 10s infinite alternate ease-in-out;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      100% {
+        transform: translateY(-50px) rotate(5deg);
+      }
+    }
+
+    /* Variasi posisi */
+    .glow-text:nth-child(odd) {
+      animation-duration: 8s;
+    }
+    .glow-text:nth-child(even) {
+      animation-duration: 12s;
+    }
+
+    /* Central teks lebih jelas */
+    .center-text {
+      position: absolute;
+      font-size: 4rem;
+      font-weight: 900;
+      color: #00fff7;
+      text-shadow:
+        0 0 20px #00fff7,
+        0 0 40px #00e8ff,
+        0 0 80px #00caff;
+      z-index: 10;
+      animation: pulse 2s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.05);
+        opacity: 0.85;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="center-text">Coming Soon</div>
+
+    <!-- Banyak teks "Coming Soon" -->
+    <!-- Ini bisa kamu duplikat lebih banyak lagi kalau mau -->
+    <div class="glow-text" style="top: 10%; left: 15%;">Coming Soon</div>
+    <div class="glow-text" style="top: 30%; left: 40%;">Coming Soon</div>
+    <div class="glow-text" style="top: 50%; left: 70%;">Coming Soon</div>
+    <div class="glow-text" style="top: 80%; left: 20%;">Coming Soon</div>
+    <div class="glow-text" style="top: 65%; left: 50%;">Coming Soon</div>
+    <div class="glow-text" style="top: 25%; left: 75%;">Coming Soon</div>
+    <div class="glow-text" style="top: 5%; left: 60%;">Coming Soon</div>
+    <div class="glow-text" style="top: 90%; left: 10%;">Coming Soon</div>
+    <div class="glow-text" style="top: 35%; left: 5%;">Coming Soon</div>
+    <div class="glow-text" style="top: 75%; left: 85%;">Coming Soon</div>
+  </div>
+</body>
+</html>
