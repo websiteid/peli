@@ -671,14 +671,14 @@ html, body {
 
   }
   </style>
-   <link rel="icon" href="https://files.catbox.moe/6rg6qw.png" type="image/png">
+   <link rel="icon" href="c:\Users\LENOVO\Downloads\ankan\Untitled design.png" type="image/png">
 </head>
 <body>
 
 <audio id="notifikasiAudio" preload="auto">
-  <source src="https://files.catbox.moe/n6ap0t.mp3" type="audio/mpeg">
-  Browser kamu tidak mendukung audio.
+  <source src="https://files.catbox.moe/n6ap0t.mp3" type="audio/mpeg" />
 </audio>
+
 
 
   <!-- Loading Screen -->
@@ -937,16 +937,38 @@ html, body {
   });
 </script>
 
-<script>
-  // Coba putar suara saat pengguna pertama kali berinteraksi
-  window.addEventListener('click', function () {
-    const audio = document.getElementById("notifikasiAudio");
-    audio.play();
-  }, { once: true });
-</script>
 
+<script>
+  // Fungsi untuk memainkan audio
+  function playNotificationSound() {
+    const audio = document.getElementById("notifikasiAudio");
+    if (!audio) return;
+
+    audio.currentTime = 0;
+    audio.play()
+      .then(() => {
+        console.log("Audio berhasil diputar");
+      })
+      .catch(e => {
+        console.warn("Pemutaran audio gagal:", e);
+      });
+  }
+
+  // Fungsi untuk event listener yang dipanggil sekali saja
+  function onFirstUserInteraction() {
+    playNotificationSound();
+    // Lepas event listener setelah satu kali pemutaran
+    window.removeEventListener('click', onFirstUserInteraction);
+    window.removeEventListener('touchstart', onFirstUserInteraction);
+  }
+
+  // Pasang listener saat halaman siap
+  window.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('click', onFirstUserInteraction);
+    window.addEventListener('touchstart', onFirstUserInteraction);
+  });
+</script>
 
 
 </body>
 </html>
-
