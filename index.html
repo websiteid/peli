@@ -675,7 +675,10 @@ html, body {
 </head>
 <body>
 
-
+<audio id="notifikasiAudio" preload="auto">
+  <source src="https://files.catbox.moe/n6ap0t.mp3" type="audio/mpeg">
+  Browser kamu tidak mendukung audio.
+</audio>
 
 
   <!-- Loading Screen -->
@@ -934,6 +937,13 @@ html, body {
   });
 </script>
 
+<script>
+  // Coba putar suara saat pengguna pertama kali berinteraksi
+  window.addEventListener('click', function () {
+    const audio = document.getElementById("notifikasiAudio");
+    audio.play();
+  }, { once: true });
+</script>
 
 
 
